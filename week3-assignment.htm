@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    </meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Taipei's Tourist Spots</title>
+    <style >
+        body {
+            margin: 0px;
+            background-color: #cccccc;
+        }
+
+        nav {
+            display: flex;
+        }
+
+        nav>.logo {
+            flex: auto;
+            background-color: #cccccc;
+            font-weight: bold;
+        }
+
+        nav>.list {
+            flex: none;
+            width: 100px;
+            background-color: #cccccc;
+            font-weight: bold;
+        }
+
+        nav>.burger{
+            display:none;
+            background-color: #cccccc;
+            font-weight: bold;
+            padding-right: 10px;
+        }
+
+        .head {
+            text-align: center;
+            background-color: darkslategray;
+            height: 300px;
+            line-height: 300px;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            align-items:stretch;
+            justify-content: center;
+            background-color: #cccccc;
+        }
+
+        main>.item {
+            flex: none;
+            width: 280px;
+            margin: 10px;
+            background-color: darkslategray;
+            text-align: center; 
+            font-weight: bold;
+            padding-bottom: 10px;
+            font-size: 20px;
+        } 
+
+
+        @media (max-width:1200px ) {
+            main>.item {
+                width: 45%;
+            }
+        }
+
+        @media (max-width:600px ) {
+            main>.item {
+                width: 90%;
+            }
+            nav>.list{
+                display:none;
+            }
+            nav>.burger{
+                display: inline;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    <script>
+        let src = "https://padax.github.io/taipei-day-trip-resources/taipei-attractions.json";
+        fetch(src).then(
+            function (responce) {
+                return responce.json();
+            }
+        ).then(
+            function (result) {
+                for (i = 0; i < 8; i++) {
+                    var created_Img = document.createElement("img");   
+                    var pic=result.result.results[i]["file"].split("http://");
+                    created_Img.src ="http://"+pic[1];  
+                    var currentImg = document.getElementById("img"+i); 
+                    created_Img.style.width="100%";
+                    created_Img.style.height="100%";
+                    currentImg.appendChild(created_Img);  
+                }
+
+
+                for (i = 0; i < 8; i++) {
+                    var created_div = document.createElement("div");
+                    var div_content = document.createTextNode(result.result.results[i]["stitle"]);
+                    created_div.appendChild(div_content);
+                    var currentDiv = document.getElementById("div" + i);
+                    currentDiv.appendChild(created_div);
+                }
+
+            }
+        )
+    </script>
+
+    <nav>
+        <div class="logo">My Website</div>
+        <div class="list">item1</div>
+        <div class="list">item2</div>
+        <div class="list">item3</div>
+        <div class="list">item4</div>
+        <div class="burger">☰</div>
+    </nav>
+
+    <div class="head">Welcome to My Website</div>
+
+
+    <main>
+        <div class="item">
+            <div id="img0" class="container"></div>
+            <div id="div0"></div>
+        </div>
+        <div class="item">
+            <div id="img1" class="container"></div>
+            <div id="div1"></div>
+        </div>
+        <div class="item">
+            <div id="img2" class="container"></div>
+            <div id="div2"></div>
+        </div>
+        <div class="item">
+            <div id="img3" class="container"></div>
+            <div id="div3"></div>
+        </div>
+    </main>
+    <main>
+        <div class="item">
+            <div id="img4" class="container"></div>
+            <div id="div4"></div>
+        </div>
+        <div class="item">
+            <div id="img5" class="container"></div>
+            <div id="div5"></div>
+        </div>
+        <div class="item">
+            <div id="img6" class="container"></div>
+            <div id="div6"></div>
+        </div>
+        <div class="item">
+            <div id="img7" class="container"></div>
+            <div id="div7"></div>
+        </div>
+    </main>
+</body>
+
+</html>
